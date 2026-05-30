@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://cx6ttyuik207m"]
+
+[ext_resource type="Script" uid="uid://dktb181tnxm3s" path="res://scenes/player.gd" id="1_kt5jd"]
+[ext_resource type="PackedScene" uid="uid://c1aa1shoknxqv" path="res://scenes/interact_ray.tscn" id="2_0t3sa"]
+[ext_resource type="Material" uid="uid://becyo36svkmbm" path="res://hand_material.tres" id="3_lnt0p"]
+
+[node name="XROrigin3D" type="XROrigin3D" unique_id=1353614894]
+script = ExtResource("1_kt5jd")
+
+[node name="LeftController" type="XRController3D" parent="." unique_id=1501579753]
+tracker = &"left_hand"
+
+[node name="RightController" type="XRController3D" parent="." unique_id=611298586]
+tracker = &"right_hand"
+
+[node name="LeftHandAimController" type="XRController3D" parent="." unique_id=965574851]
+tracker = &"/user/fbhandaim/left"
+
+[node name="Interact_Ray" parent="LeftHandAimController" unique_id=923011452 instance=ExtResource("2_0t3sa")]
+
+[node name="RightHandAimController" type="XRController3D" parent="." unique_id=687359802]
+tracker = &"/user/fbhandaim/right"
+
+[node name="Interact_Ray" parent="RightHandAimController" unique_id=1130583788 instance=ExtResource("2_0t3sa")]
+
+[node name="LeftHandTracker" type="XRNode3D" parent="." unique_id=1242074510]
+tracker = &"/user/hand_tracker/left"
+show_when_tracked = true
+
+[node name="OpenXRFbHandTrackingMesh" type="OpenXRFbHandTrackingMesh" parent="LeftHandTracker" unique_id=994342600]
+material = ExtResource("3_lnt0p")
+
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="LeftHandTracker/OpenXRFbHandTrackingMesh" unique_id=746240323]
+
+[node name="RightHandTracker" type="XRNode3D" parent="." unique_id=144349121]
+tracker = &"/user/hand_tracker/right"
+show_when_tracked = true
+
+[node name="OpenXRFbHandTrackingMesh" type="OpenXRFbHandTrackingMesh" parent="RightHandTracker" unique_id=1811438887]
+hand = 1
+material = ExtResource("3_lnt0p")
+bones/0/name = "RightPalm"
+bones/1/name = "RightHand"
+bones/2/name = "RightThumbMetacarpal"
+bones/3/name = "RightThumbProximal"
+bones/4/name = "RightThumbDistal"
+bones/5/name = "RightThumbTip"
+bones/6/name = "RightIndexMetacarpal"
+bones/7/name = "RightIndexProximal"
+bones/8/name = "RightIndexIntermediate"
+bones/9/name = "RightIndexDistal"
+bones/10/name = "RightIndexTip"
+bones/11/name = "RightMiddleMetacarpal"
+bones/12/name = "RightMiddleProximal"
+bones/13/name = "RightMiddleIntermediate"
+bones/14/name = "RightMiddleDistal"
+bones/15/name = "RightMiddleTip"
+bones/16/name = "RightRingMetacarpal"
+bones/17/name = "RightRingProximal"
+bones/18/name = "RightRingIntermediate"
+bones/19/name = "RightRingDistal"
+bones/20/name = "RightRingTip"
+bones/21/name = "RightLittleMetacarpal"
+bones/22/name = "RightLittleProximal"
+bones/23/name = "RightLittleIntermediate"
+bones/24/name = "RightLittleDistal"
+bones/25/name = "RightLittleTip"
+
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="RightHandTracker/OpenXRFbHandTrackingMesh" unique_id=1172065868]
+hand_tracker = &"/user/hand_tracker/right"
+
+[node name="XRCamera3D" type="XRCamera3D" parent="." unique_id=1388567485]

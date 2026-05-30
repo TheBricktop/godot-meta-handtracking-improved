@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://h2sg06gl5wx"]
+
+[ext_resource type="Script" uid="uid://dixgmq3cxjlwg" path="res://scenes/teleport_spot.gd" id="1_d7eo3"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_avnu5"]
+
+[sub_resource type="Animation" id="Animation_hdvrk"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_d7eo3"]
+resource_name = "enable"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hdvrk"]
+_data = {
+&"RESET": SubResource("Animation_hdvrk"),
+&"enable": SubResource("Animation_d7eo3")
+}
+
+[sub_resource type="Gradient" id="Gradient_d7eo3"]
+offsets = PackedFloat32Array(0.5, 0.93, 0.96)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.4627451, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hdvrk"]
+gradient = SubResource("Gradient_d7eo3")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(1, 0.52136755)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o752n"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+albedo_texture = SubResource("GradientTexture2D_hdvrk")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_yqpdt"]
+
+[node name="TeleportSpot" type="StaticBody3D" unique_id=223687262]
+collision_layer = 4
+script = ExtResource("1_d7eo3")
+interact_text = "teleport"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1657846130]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_avnu5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2049894317]
+libraries/ = SubResource("AnimationLibrary_hdvrk")
+autoplay = &"RESET"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1813610291]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_o752n")
+mesh = SubResource("CylinderMesh_yqpdt")

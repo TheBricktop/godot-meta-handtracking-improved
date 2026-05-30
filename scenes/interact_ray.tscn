@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c1aa1shoknxqv"]
+
+[ext_resource type="Script" uid="uid://brtqnlvt0usuj" path="res://raycast.gd" id="1_jrvnc"]
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_1bvp3"]
+
+[node name="Interact_Ray" type="RayCast3D" unique_id=923011452]
+target_position = Vector3(0, 0, -10)
+collision_mask = 4
+script = ExtResource("1_jrvnc")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=1423962399]
+collision_mask = 5
+shape = SubResource("SeparationRayShape3D_1bvp3")
+spring_length = -10.0
+
+[node name="Label3D" type="Label3D" parent="SpringArm3D" unique_id=1693626848]
+pixel_size = 0.003
+billboard = 1
+fixed_size = true
+text = "🔷"
