@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://b6k86po6lr65p"]
+
+[ext_resource type="Script" uid="uid://bt5jrmdleoam1" path="res://handtracking_interface.gd" id="1_1bvp3"]
+[ext_resource type="PackedScene" path="res://scenes/xr_origin_3d.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://h2sg06gl5wx" path="res://scenes/teleport_spot.tscn" id="2_h2yge"]
+
+[sub_resource type="Gradient" id="Gradient_h2yge"]
+colors = PackedColorArray(0, 0.16470589, 0, 1, 0.06666667, 0.21960784, 0.06666667, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1bvp3"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lquwl"]
+noise = SubResource("FastNoiseLite_1bvp3")
+color_ramp = SubResource("Gradient_h2yge")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7mycd"]
+albedo_texture = SubResource("NoiseTexture2D_lquwl")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_0xm2m"]
+sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 2
+sky = SubResource("Sky_0xm2m")
+tonemap_mode = 2
+
+[node name="Main" type="Node3D" unique_id=1693585803]
+script = ExtResource("1_1bvp3")
+
+[node name="TeleportSpot" parent="." unique_id=223687262 instance=ExtResource("2_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.54723847, -0.00862962, -1.9776603)
+
+[node name="TeleportSpot2" parent="." unique_id=898447153 instance=ExtResource("2_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9474082, -0.00862962, -1.4534746)
+
+[node name="TeleportSpot3" parent="." unique_id=2070942765 instance=ExtResource("2_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8659136, -0.008629739, 2.1792784)
+
+[node name="TeleportSpot4" parent="." unique_id=1992279600 instance=ExtResource("2_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.59744, -0.008629739, -0.00516057)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=253450062]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+material_override = SubResource("StandardMaterial3D_7mycd")
+size = Vector3(100, 0.5, 100)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2136739456]
+environment = SubResource("Environment_h2yge")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2062618390]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="XROrigin3D" parent="." unique_id=1353614894 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.706019, 0)
